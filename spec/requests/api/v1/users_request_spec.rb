@@ -118,5 +118,4 @@ RSpec.describe 'Users API endpoints' do
       expect(response.status).to eq(404)
     end
   end
-
 end

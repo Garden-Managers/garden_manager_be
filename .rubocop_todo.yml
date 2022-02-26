@@ -70,8 +70,8 @@ Style/Documentation:
     - 'app/controllers/api/v1/users_controller.rb'
     - 'app/models/application_record.rb'
     - 'config/application.rb'
-    - 'db/migrate/20220224231937_create_users.rb'
-    - 'db/migrate/20220226060453_add_index_to_users.rb'
+    - 'db/migrate/*'
+
 
 # Offense count: 35
 # Cop supports --auto-correct.

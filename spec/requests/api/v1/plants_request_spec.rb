@@ -4,7 +4,7 @@ RSpec.describe 'Plants API endpoints' do
   describe 'GET plants' do
     before(:each) do
       create_list(:plant, 3)
-      get '/api/v1/users'
+      get '/api/v1/plants'
     end
     let!(:plants) { JSON. parse(response.body, symbolize_names: true) }
 
@@ -18,8 +18,11 @@ RSpec.describe 'Plants API endpoints' do
 
     it 'returns correct info for each object' do
       plants[:data].each do |plant|
-        expect(plants).to have_key(:id)
-        expect(plant[:id]).to be_a(Hash)
+        expect(plant).to have_key(:id)
+        expect(plant[:id]).to be_a(String)
+
+        expect(plant).to have_key(:type)
+        expect(plant[:type]).to eq('plant')
 
         expect(plant).to have_key(:attributes)
         expect(plant[:attributes]).to be_a(Hash)
@@ -41,7 +44,7 @@ RSpec.describe 'Plants API endpoints' do
       plant1 = create(:plant)
       get "/api/v1/plants/#{plant1.id}"
     end
-    let!(plant1) { JSON.parse(response.body, symbolize_names: true) }
+    let!(:plant1) { JSON.parse(response.body, symbolize_names: true) }
 
     it 'returns successful' do
       expect(response).to be_successful
@@ -78,7 +81,8 @@ RSpec.describe 'Plants API endpoints' do
 
   describe 'POST plant' do
     it 'can create new plant' do
-      post '/api/v1/plants', params: { plant: { name: 'Sunflower', frost_date: 10, maturity: 120 } }
+      plant_params = { plant: { name: 'Sunflower', frost_date: 10, maturity: 120 } }
+      post '/api/v1/plants', params: plant_params
       created_plant = Plant.last
 
       expect(response).to be_successful
@@ -88,7 +92,8 @@ RSpec.describe 'Plants API endpoints' do
     end
 
     it 'returns status 400 if plant not created' do
-      post '/api/v1/users', params { plant: { name: nil } }
+      plant_params = { plant: { name: 'Sunflower' } }
+      post '/api/v1/plants', params: plant_params
 
       expect(response.status).to eq(400)
     end

@@ -23,8 +23,7 @@ jobs:
     docker:
       - image: cimg/ruby:2.7.2-node
       - environment:
-          RAILSENV: test
-          POSTGRES_DB: garden_manager_be_test
+          POSTGRES_DB: garden_manager_be_development
           POSTGRES_USER: garden_manager_be
           POSTGRES_PASSWORD: ''
         image: cimg/postgres:14.1

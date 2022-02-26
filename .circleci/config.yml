@@ -24,8 +24,6 @@ jobs:
       - image: cimg/ruby:2.7.2-node
       - environment:
           POSTGRES_DB: garden_manager_test
-          POSTGRES_PASSWORD: ''
-          POSTGRES_USER: circleci-demo-ruby
         image: cimg/postgres:14.1
     environment:
       BUNDLE_JOBS: 3

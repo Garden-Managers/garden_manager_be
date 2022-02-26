@@ -42,6 +42,7 @@ group :development, :test do
   gem 'simplecov'
   gem 'shoulda-matchers'
   gem 'rubocop', require: false
+  gem 'rspec_junit_formatter'
 end
 
 group :development do

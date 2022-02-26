@@ -23,14 +23,15 @@ jobs:
     docker:
       - image: cimg/ruby:2.7.2-node
       - environment:
-          POSTGRES_DB: garden_manager_test
+          POSTGRES_DB: garden_manager_be_test
+          POSTGRES_USER: garden_manager_be
           POSTGRES_PASSWORD: ''
-          POSTGRES_USER: circleci-demo-ruby
-        image: cimg/postgres:14.1.0
+        image: cimg/postgres:14.1
     environment:
       BUNDLE_JOBS: 3
       BUNDLE_RETRY: 3
       PGHOST: 127.0.0.1
+      PGUSER: garden_manager_be
       PGPASSWORD: ''
       RAILSENV: test
     parallelism: 3
@@ -42,9 +43,11 @@ jobs:
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
           name: Database setup
-          command: bundle exec rails db:schema:load --trace
+          command: |
+              bundle exec rails db:create RAILS_ENV=test
+              bundle exec rails db:migrate RAILS_ENV=test
       - ruby/rspec-test:
-          name: RSpec tests
+          label: RSpec tests
           include: spec/**/*_spec.rb
 
 workflows:

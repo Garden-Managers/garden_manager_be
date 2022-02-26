@@ -19,7 +19,7 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-private
+  private
 
   def user_params
     params.require(:user).permit(:name, :email, :password_digest, :zip)
@@ -27,10 +27,10 @@ private
 
   def not_found
     payload = {
-      message: "User not found",
+      message: 'User not found',
       code: 404,
-      status: "NOT FOUND"
+      status: 'NOT FOUND'
     }
-    render json: payload, status: 404
+    render json: payload, status: :not_found
   end
 end

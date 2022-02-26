@@ -40,7 +40,7 @@ Layout/SpaceInsideArrayLiteralBrackets:
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
 # IgnoredMethods: refine
 Metrics/BlockLength:
-  Max: 57
+  Max: 200
 
 # Offense count: 1
 # Configuration parameters: EnforcedStyle.

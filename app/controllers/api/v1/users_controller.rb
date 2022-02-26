@@ -19,6 +19,10 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def destroy
+    render json: User.delete(params[:id])
+  end
+
   private
 
   def user_params

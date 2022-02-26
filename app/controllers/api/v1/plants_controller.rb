@@ -1,5 +1,5 @@
 class Api::V1::PlantsController < ApplicationController
-  recue_from ActiveRecord::RecordNotFound, with: :not_found
+rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   def index
     render json: PlantSerializer.new(Plant.all)
@@ -10,7 +10,7 @@ class Api::V1::PlantsController < ApplicationController
   end
 
   def create
-    plant = Plant.create(plant_params)
+    plant = Plant.new(plant_params)
 
     if plant.save
       render json: PlantSerializer.new(plant)
@@ -19,7 +19,20 @@ class Api::V1::PlantsController < ApplicationController
     end
   end
 
-  private
+private
+
+  def plant_params
+    params.require(:plant).permit(:name, :frost_date, :maturity)
+  end
+
+  def not_found
+    payload = {
+      message: 'Plant not found',
+      code: 404,
+      status: 'NOT FOUND'
+    }
+    render json: payload, status: :not_found
+  end
 
   def not_created
     payload = {

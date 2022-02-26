@@ -118,7 +118,27 @@ RSpec.describe 'Users API endpoints' do
       expect(response.status).to eq(404)
     end
   end
-<<<<<<< HEAD
+
+  describe 'POST user' do
+    it 'can create new user' do
+      user_params = { user: { name: 'Jeff', email: 'jeff@email.com', password: 'password123', password_confirmation: 'password123', zip: '80918' } }
+      post "/api/v1/users", params: user_params
+      created_user = User.last
+
+      expect(response).to be_successful
+      expect(created_user.name).to eq('Jeff')
+      expect(created_user.email).to eq('jeff@email.com')
+      expect(created_user).to_not have_attribute(:password)
+      expect(created_user.password_digest).to_not eq('password123')
+    end
+
+    it 'returns status 400 if user not created' do
+      user_params = { user: { name: 'Jeff' } }
+      post "/api/v1/users", params: user_params
+
+      expect(response.status).to eq(400)
+    end
+  end
 
   describe 'DELETE user' do
     it 'can delete an item' do
@@ -131,6 +151,4 @@ RSpec.describe 'Users API endpoints' do
       expect(User.count).to eq(0)
     end
   end
-=======
->>>>>>> bbf17e8172e5b6563dbdf3f202136a2bdfa31630
 end

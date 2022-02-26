@@ -44,7 +44,7 @@ jobs:
           name: Database setup
           command: bundle exec rails db:schema:load --trace
       - ruby/rspec-test:
-          name: RSpec tests
+          label: RSpec tests
           include: spec/**/*_spec.rb
 
 workflows:

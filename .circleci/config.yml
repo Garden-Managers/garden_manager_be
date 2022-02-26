@@ -1,11 +1,58 @@
 version: 2.1
+
+orbs:
+  ruby: circleci/ruby@1.4.0
+
 jobs:
   build:
     docker:
-      - image: alpine:3.7
+      - image: cimg/ruby:2.7.2-node
     steps:
+      - checkout
+      - ruby/install-deps
+  checking:
+    docker:
+      - image: cimg/ruby:2.7.2-node
+    steps:
+      - checkout
+      - ruby/install-deps
+      - ruby/rubocop-check:
+          format: progress
+          label: Inspecting with Rubocop
+  test:
+    docker:
+      - image: cimg/ruby:2.7.2-node
+      - environment:
+          POSTGRES_DB: garden_manager_test
+          POSTGRES_PASSWORD: ''
+          POSTGRES_USER: circleci-demo-ruby
+        image: cimg/postgres:14.1.0
+    environment:
+      BUNDLE_JOBS: 3
+      BUNDLE_RETRY: 3
+      PGHOST: 127.0.0.1
+      PGPASSWORD: ''
+      RAILSENV: test
+    parallelism: 3
+    steps:
+      - checkout
+      - ruby/install-deps
       - run:
-          name: The First Step
-          command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: bundle exec rails db:schema:load --trace
+      - ruby/rspec-test:
+          name: RSpec tests
+          include: spec/**/*_spec.rb
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - checking
+      - test:
+          requires:
+            - build 

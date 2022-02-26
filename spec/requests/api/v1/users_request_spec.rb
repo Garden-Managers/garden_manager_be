@@ -118,6 +118,7 @@ RSpec.describe 'Users API endpoints' do
       expect(response.status).to eq(404)
     end
   end
+<<<<<<< HEAD
 
   describe 'DELETE user' do
     it 'can delete an item' do
@@ -130,4 +131,6 @@ RSpec.describe 'Users API endpoints' do
       expect(User.count).to eq(0)
     end
   end
+=======
+>>>>>>> bbf17e8172e5b6563dbdf3f202136a2bdfa31630
 end

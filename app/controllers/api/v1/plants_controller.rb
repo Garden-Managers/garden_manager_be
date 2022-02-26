@@ -29,4 +29,4 @@ class Api::V1::PlantsController < ApplicationController
     }
     render json: payload, status: :bad_request
   end
-end 
+end

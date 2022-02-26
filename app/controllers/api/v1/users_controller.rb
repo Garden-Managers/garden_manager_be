@@ -19,10 +19,13 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+<<<<<<< HEAD
   def destroy
     render json: User.delete(params[:id])
   end
 
+=======
+>>>>>>> bbf17e8172e5b6563dbdf3f202136a2bdfa31630
   private
 
   def user_params

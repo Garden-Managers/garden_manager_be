@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :users, only: [:index, :create, :update, :destroy]
       resources :plants, only: [:index, :show, :create]
       get '/user', to: 'users#show'
+      get '/user/:id/forecast', to: 'forecast#index'
     end
   end
 end

@@ -16,7 +16,6 @@ RSpec.describe 'Frost Date API Endpoints' do
 
       expect(frost_dates).to be_an Array
       expect(frost_dates.count).to eq(2)
-      require 'pry'; binding.pry
     end
   end
 end

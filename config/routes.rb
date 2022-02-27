@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       resources :plants, only: [:index, :show, :create]
       get '/user', to: 'users#show'
 
+      resources :user_plants, only: [:create, :destroy]
+
     end
   end
 end

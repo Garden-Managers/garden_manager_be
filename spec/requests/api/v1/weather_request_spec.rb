@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Weather API Endpoints' do
   describe 'GET weather' do
     before(:each) do
-      user = create(:user)
+      user = create(:user, latitude: 80, longitude: 90)
       get "/api/v1/user/#{user.id}/forecast"
     end
 
@@ -11,8 +11,12 @@ RSpec.describe 'Weather API Endpoints' do
       expect(response).to be_successful
     end
 
-    # it 'returns the current weather and forecast data in a hash' do
-    #   require 'pry'; binding.pry
-    # end
+    it 'returns the current weather and forecast data in a hash' do
+      weather_data = JSON.parse(response.body, symbolize_names: true)
+
+      expect(weather_data).to be_a Hash
+      # expect(weather_data[:attributes]
+      require 'pry'; binding.pry
+    end
   end
 end

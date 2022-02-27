@@ -18,7 +18,7 @@ RSpec.describe WeatherFacade do
       weather = WeatherFacade.new
       user = create(:user, zip: "80111", latitude: 80, longitude: 90)
       weather_data = weather.all_weather(user.latitude, user.longitude)
-      
+
       expect(weather_data[:lat].to_s).to eq(user.latitude)
       expect(weather_data[:lon].to_s).to eq(user.longitude)
       expect(weather_data[:daily].count).to eq(8)

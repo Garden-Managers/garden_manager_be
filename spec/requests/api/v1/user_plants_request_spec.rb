@@ -89,5 +89,5 @@ RSpec.describe 'User Plants API endpoints' do
         expect(plant[:attributes][:maturity]).to be_an(Integer)
       end
     end
-  end
+  end 
 end

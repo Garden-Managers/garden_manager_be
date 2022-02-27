@@ -9,7 +9,7 @@ RSpec.describe 'User Plants API endpoints' do
       user_plant_params = { user_id: user1.id, plant_id: plant1.id }
 
       post '/api/v1/user_plants', params: user_plant_params
-      
+
       created_user_plant = UserPlant.last
 
       expect(response).to be_successful
@@ -27,4 +27,17 @@ RSpec.describe 'User Plants API endpoints' do
       expect(response.status).to eq(400)
     end
   end
+
+  describe 'DELETE user_plant' do
+    it 'can delete user_plant' do
+      user_plant = create(:user_plant)
+
+      expect(UserPlant.count).to eq(1)
+
+      delete "/api/v1/user_plants/#{user_plant.id}"
+
+      expect(response).to be_successful
+      expect(UserPlant.count).to eq(0)
+    end
+  end 
 end

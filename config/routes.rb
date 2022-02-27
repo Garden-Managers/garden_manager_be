@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :plants, only: [:index, :show, :create]
       get '/user', to: 'users#show'
       get '/user/:id/forecast', to: 'forecast#index'
+
       resources :user_plants, only: [:create, :destroy]
     end
   end

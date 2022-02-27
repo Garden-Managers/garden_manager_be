@@ -12,6 +12,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :not_found
   end
 
   def destroy
+    render json: UserPlant.delete(params[:id])
   end
 
 private

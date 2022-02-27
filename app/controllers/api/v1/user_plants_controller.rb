@@ -3,7 +3,6 @@ rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   def create
     user_plant = UserPlant.create(user_id: params[:user_id], plant_id: params[:plant_id])
-
     if user_plant.save
       render json: UserPlantSerializer.new(user_plant)
     else
@@ -13,6 +12,11 @@ rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   def destroy
     render json: UserPlant.delete(params[:id])
+  end
+
+  def all
+    user = User.find(params[:user_id])
+    render json: PlantSerializer.new(user.plants)
   end
 
 private

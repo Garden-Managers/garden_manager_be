@@ -6,7 +6,7 @@ RSpec.describe 'Plants API endpoints' do
       create_list(:plant, 3)
       get '/api/v1/plants'
     end
-    let!(:plants) { JSON. parse(response.body, symbolize_names: true) }
+    let!(:plants) { JSON.parse(response.body, symbolize_names: true) }
 
     it 'returns successful' do
       expect(response).to be_successful

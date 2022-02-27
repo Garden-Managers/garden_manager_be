@@ -5,12 +5,12 @@ class ForecastSerializer
 
     {
       "attributes": {
-        "current day": {
+        "current_day": {
           "min": data[:daily][0][:temp][:min],
           "max": data[:daily][0][:temp][:max],
           "weather": data[:daily][0][:weather][0][:main]
         },
-        "weekly forecast": data[:daily].drop(1).map do |daily_weather|
+        "weekly_forecast": data[:daily].drop(1).map do |daily_weather|
           {
           "dt": daily_weather[:dt],
           "min": daily_weather[:temp][:min],

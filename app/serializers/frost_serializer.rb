@@ -2,7 +2,7 @@ class FrostSerializer
   include JSONAPI::Serializer
 
   def self.format_frost_dates(spring, fall)
-    test = [
+    [
       {
         "season": "fall",
         "temperature_threshold": "32",

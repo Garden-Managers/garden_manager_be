@@ -118,12 +118,15 @@ RSpec.describe 'Users API endpoints' do
       expect(response.status).to eq(404)
     end
 
-    it 'updates the users zip code' do
+    it 'updates the users zip code and coordinates' do
       user = create(:user)
       patch "/api/v1/users/#{user.id}", params: { user: { zip: '80223' } }
       updated_user = JSON.parse(response.body, symbolize_names: true)
       
       expect(updated_user[:data][:attributes][:zip]).to eq("80223")
+      expect(updated_user[:data][:attributes][:latitude]).to be_a String
+      expect(updated_user[:data][:attributes][:longitude]).to be_a String
+
     end
   end
 end

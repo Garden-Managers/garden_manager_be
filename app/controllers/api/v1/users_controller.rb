@@ -11,6 +11,11 @@ class Api::V1::UsersController < ApplicationController
 
   def update
     user = User.find(params[:id])
+    weather = WeatherFacade.new
+    # Finds the coordinates of the user based on user zip code
+    coords = weather.coordinates(user.zip)
+    # Automatically updates the geo coordinates of the user for the JSON response.
+    user.update(latitude: coords.latitude, longitude: coords.longitude)
 
     if user.update(user_params)
       render json: UserSerializer.new(user)
@@ -22,7 +27,7 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password_digest, :zip)
+    params.require(:user).permit(:name, :email, :password_digest, :zip, :latitude, :longitude)
   end
 
   def not_found

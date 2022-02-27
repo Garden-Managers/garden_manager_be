@@ -6,7 +6,7 @@ RSpec.describe 'Plants API endpoints' do
       create_list(:plant, 3)
       get '/api/v1/plants'
     end
-    let!(:plants) { JSON.parse(response.body, symbolize_names: true) }
+    let!(:plants) { JSON. parse(response.body, symbolize_names: true) }
 
     it 'returns successful' do
       expect(response).to be_successful
@@ -20,6 +20,9 @@ RSpec.describe 'Plants API endpoints' do
       plants[:data].each do |plant|
         expect(plant).to have_key(:id)
         expect(plant[:id]).to be_a(String)
+
+        expect(plant).to have_key(:type)
+        expect(plant[:type]).to eq('plant')
 
         expect(plant).to have_key(:attributes)
         expect(plant[:attributes]).to be_a(Hash)
@@ -71,9 +74,28 @@ RSpec.describe 'Plants API endpoints' do
     end
 
     it 'returns status 404 if plant id invalid' do
-      get '/api/v1/plants/1864861861'
-
+      get '/api/v1/plants/58198489494'
       expect(response.status).to eq(404)
+    end
+  end
+
+  describe 'POST plant' do
+    it 'can create new plant' do
+      plant_params = { plant: { name: 'Sunflower', frost_date: 10, maturity: 120 } }
+      post '/api/v1/plants', params: plant_params
+      created_plant = Plant.last
+
+      expect(response).to be_successful
+      expect(created_plant.name).to eq('Sunflower')
+      expect(created_plant.frost_date).to eq(10)
+      expect(created_plant.maturity).to eq(120)
+    end
+
+    it 'returns status 400 if plant not created' do
+      plant_params = { plant: { name: 'Sunflower' } }
+      post '/api/v1/plants', params: plant_params
+
+      expect(response.status).to eq(400)
     end
   end
 end

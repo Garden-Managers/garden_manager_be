@@ -9,7 +9,21 @@ rescue_from ActiveRecord::RecordNotFound, with: :not_found
     render json: PlantSerializer.new(Plant.find(params[:id]))
   end
 
+  def create
+    plant = Plant.new(plant_params)
+
+    if plant.save
+      render json: PlantSerializer.new(plant)
+    else
+      not_created
+    end
+  end
+
 private
+
+  def plant_params
+    params.require(:plant).permit(:name, :frost_date, :maturity)
+  end
 
   def not_found
     payload = {
@@ -20,4 +34,12 @@ private
     render json: payload, status: :not_found
   end
 
+  def not_created
+    payload = {
+      message: 'Plant could not be created',
+      code: 400,
+      status: 'BAD REQUEST'
+    }
+    render json: payload, status: :bad_request
+  end
 end

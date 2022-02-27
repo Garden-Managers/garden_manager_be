@@ -15,7 +15,7 @@ class Api::V1::UsersController < ApplicationController
     # Finds the coordinates of the user based on user zip code
     coords = weather.coordinates(user.zip)
     # Automatically updates the geo coordinates of the user for the JSON response.
-    user.update(latitude: coords.latitude, longitude: coords.longitude)
+    user.update(latitude: coords[:lat], longitude: coords[:lon])
 
     if user.update(user_params)
       render json: UserSerializer.new(user)

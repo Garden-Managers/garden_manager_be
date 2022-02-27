@@ -33,7 +33,9 @@ class Api::V1::UsersController < ApplicationController
     render json: User.delete(params[:id])
   end
 
+
 private
+
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :zip)

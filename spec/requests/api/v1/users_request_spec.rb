@@ -119,6 +119,7 @@ RSpec.describe 'Users API endpoints' do
     end
   end
 
+
   describe 'POST user' do
     it 'can create new user' do
       user_params = { user: { name: 'Jeff', email: 'jeff@email.com', password: 'password123', password_confirmation: 'password123', zip: '80918' } }

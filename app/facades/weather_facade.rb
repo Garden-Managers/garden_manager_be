@@ -1,6 +1,6 @@
 class WeatherFacade
-  def all_weather(zip_code)
-    weather_data = WeatherService.get_all_weather(zip_code)
-    require 'pry'; binding.pry
+  def coordinates(zip_code)
+    weather_data = WeatherService.get_coordinates(zip_code)
+    coordinates = Coordinates.new(weather_data)
   end
 end

@@ -118,4 +118,16 @@ RSpec.describe 'Users API endpoints' do
       expect(response.status).to eq(404)
     end
   end
+
+  describe 'DELETE user' do
+    it 'can delete an item' do
+      user1 = create(:user)
+      expect(User.count).to eq(1)
+
+      delete "/api/v1/users/#{user1.id}"
+
+      expect(response).to be_successful
+      expect(User.count).to eq(0)
+    end
+  end
 end

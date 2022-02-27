@@ -6,10 +6,10 @@ RSpec.describe WeatherFacade do
       weather = WeatherFacade.new
       coordinates = weather.coordinates(80223)
 
-      expect(coordinates.name).to eq("Denver")
-      expect(coordinates.zip_code).to be_a String
-      expect(coordinates.latitude).to be_an Float
-      expect(coordinates.longitude).to be_an Float
+      expect(coordinates[:name]).to eq("Denver")
+      expect(coordinates[:zip]).to be_a String
+      expect(coordinates[:lat]).to be_an Float
+      expect(coordinates[:lon]).to be_an Float
     end
   end
 

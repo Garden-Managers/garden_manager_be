@@ -8,17 +8,20 @@ RSpec.describe WeatherFacade do
 
       expect(coordinates.name).to eq("Denver")
       expect(coordinates.zip_code).to be_a String
-      expect(coordinates.latitude).to be_an String
-      expect(coordinates.longitude).to be_an String
+      expect(coordinates.latitude).to be_an Float
+      expect(coordinates.longitude).to be_an Float
     end
   end
 
   describe '#all_weather' do
     it 'returns the weather data needed for the users dashboard' do
       weather = WeatherFacade.new
-      weather_data = weather.all_weather(80223)
-      require 'pry'; binding.pry
-
+      user = create(:user, zip: "80111", latitude: 80, longitude: 90)
+      weather_data = weather.all_weather(user.latitude, user.longitude)
+      
+      expect(weather_data[:lat].to_s).to eq(user.latitude)
+      expect(weather_data[:lon].to_s).to eq(user.longitude)
+      expect(weather_data[:daily].count).to eq(8)
     end
   end
 end

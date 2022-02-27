@@ -123,7 +123,7 @@ RSpec.describe 'Users API endpoints' do
   describe 'POST user' do
     it 'can create new user' do
       user_params = { user: { name: 'Jeff', email: 'jeff@email.com', password: 'password123', password_confirmation: 'password123', zip: '80918' } }
-      post "/api/v1/users", params: user_params
+      post '/api/v1/users', params: user_params
       created_user = User.last
 
       expect(response).to be_successful
@@ -135,7 +135,7 @@ RSpec.describe 'Users API endpoints' do
 
     it 'returns status 400 if user not created' do
       user_params = { user: { name: 'Jeff' } }
-      post "/api/v1/users", params: user_params
+      post '/api/v1/users', params: user_params
 
       expect(response.status).to eq(400)
     end

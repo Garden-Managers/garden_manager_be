@@ -15,7 +15,7 @@ RSpec.describe 'Weather API Endpoints' do
       weather_data = JSON.parse(response.body, symbolize_names: true)
 
       expect(weather_data).to be_a Hash
-      expect(weather_data[:attributes].keys).to eq([:"current day", :"weekly forecast"])
+      expect(weather_data[:attributes].keys).to eq([:current_day, :weekly_forecast])
     end
   end
 end

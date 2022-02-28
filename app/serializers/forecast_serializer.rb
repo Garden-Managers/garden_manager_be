@@ -12,7 +12,7 @@ class ForecastSerializer
         },
         "weekly_forecast": data[:daily].drop(1).map do |daily_weather|
           {
-          "dt": daily_weather[:dt],
+          "dt": Time.at(daily_weather[:dt]).to_date,
           "min": daily_weather[:temp][:min],
           "max": daily_weather[:temp][:max],
           "weather": daily_weather[:weather][0][:main]

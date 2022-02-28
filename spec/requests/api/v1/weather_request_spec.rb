@@ -4,7 +4,7 @@ RSpec.describe 'Weather API Endpoints' do
   describe 'GET weather' do
     before(:each) do
       user = create(:user, latitude: 80, longitude: 90)
-      get "/api/v1/user/#{user.id}/forecast"
+      get "/api/v1/users/#{user.id}/forecast"
     end
 
     it 'returns a successful response' do

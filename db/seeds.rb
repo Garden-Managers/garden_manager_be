@@ -25,3 +25,4 @@
 @plant18 = Plant.create(name: "Peas", frost_date: -56, maturity: 57)
 @plant19 = Plant.create(name: "Celery", frost_date: 7, maturity: 80)
 @plant20 = Plant.create(name: "Sunflowers", frost_date: 0, maturity: 65)
+user = User.create(name: "Billy", email: "billyhasgoats@example.com", password: "billygoat", zip: "80132", latitude: "39.1007", longitude: "-104.8542")

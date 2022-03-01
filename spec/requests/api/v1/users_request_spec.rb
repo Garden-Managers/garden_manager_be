@@ -80,7 +80,7 @@ RSpec.describe 'Users API endpoints' do
     before(:each) do
       user1 = create(:user)
       @previous_name = user1.name
-      patch "/api/v1/users/#{user1.id}", params: { user: { name: 'Jenna' } }
+      patch "/api/v1/users/#{user1.id}", params: { name: 'Jenna' }
     end
     let!(:user1) { JSON.parse(response.body, symbolize_names: true) }
 
@@ -113,14 +113,14 @@ RSpec.describe 'Users API endpoints' do
     end
 
     it 'returns status 404 if user not found' do
-      patch '/api/v1/users/6514980891', params: { user: { name: 'Jenna' } }
+      patch '/api/v1/users/6514980891', params:  { name: 'Jenna' }
 
       expect(response.status).to eq(404)
     end
 
     it 'updates the users zip code and coordinates' do
       user = create(:user)
-      patch "/api/v1/users/#{user.id}", params: { user: { zip: '80223' } }
+      patch "/api/v1/users/#{user.id}", params:  { zip: '80223' }
       updated_user = JSON.parse(response.body, symbolize_names: true)
 
       expect(updated_user[:data][:attributes][:zip]).to eq("80223")
@@ -132,7 +132,7 @@ RSpec.describe 'Users API endpoints' do
 
   describe 'POST user' do
     it 'can create new user' do
-      user_params = { user: { name: 'Jeff', email: 'jeff@email.com', password: 'password123', password_confirmation: 'password123', zip: '80918' } }
+      user_params = { name: 'Jeff', email: 'jeff@email.com', zip: '80918' } 
       post '/api/v1/users', params: user_params
       created_user = User.last
 

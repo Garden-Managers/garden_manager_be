@@ -43,7 +43,7 @@ private
 
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :zip, :latitude, :longitude)
+    params.permit(:name, :email, :password, :password_confirmation, :zip, :latitude, :longitude)
   end
 
   def not_found

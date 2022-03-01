@@ -6,7 +6,11 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    render json: UserSerializer.new(User.find_by! email: params[:email])
+    if params[:email].present?
+      render json: UserSerializer.new(User.find_by! email: params[:email])
+    else
+      render json:UserSerializer.new(User.find_by! id: params[:id])
+    end
   end
 
   def create

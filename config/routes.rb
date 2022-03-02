@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       get '/plants/find', to: 'plant_search#index'
       resources :users, only: [:index, :show, :create, :update, :destroy] do
         get '/plants', to: 'user_plants#all'
-        get '/frost_date', to: 'frost#index'
+        get '/frost_dates', to: 'frost#index'
         get '/forecast', to: 'forecast#index'
 
       end

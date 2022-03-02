@@ -4,7 +4,7 @@ RSpec.describe 'Frost Date API Endpoints' do
   describe 'GET frost dates' do
     before(:each) do
       user = create(:user, latitude: 39.74, longitude: -104.99)
-      get "/api/v1/users/#{user.id}/frost_date"
+      get "/api/v1/users/#{user.id}/frost_dates"
     end
 
     it 'returns a successful response' do

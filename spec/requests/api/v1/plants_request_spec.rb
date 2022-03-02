@@ -81,10 +81,10 @@ RSpec.describe 'Plants API endpoints' do
 
   describe 'POST plant' do
     it 'can create new plant' do
-      plant_params = { plant: { name: 'Sunflower', frost_date: 10, maturity: 120 } }
+      plant_params = { name: 'Sunflower', frost_date: 10, maturity: 120 }
       post '/api/v1/plants', params: plant_params
       created_plant = Plant.last
-
+      
       expect(response).to be_successful
       expect(created_plant.name).to eq('Sunflower')
       expect(created_plant.frost_date).to eq(10)

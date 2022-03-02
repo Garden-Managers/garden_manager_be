@@ -62,4 +62,3 @@ Run `bundle exec rspec` to run the test suite
 - [Joel Grant](https://github.com/joel-grant)
 - [Karan Mehta](https://github.com/karanm645)
 - [Darren Kulback](https://github.com/dkulback)
-

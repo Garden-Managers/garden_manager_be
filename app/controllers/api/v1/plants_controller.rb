@@ -22,7 +22,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :not_found
 private
 
   def plant_params
-    params.require(:plant).permit(:name, :frost_date, :maturity)
+    params.permit(:name, :frost_date, :maturity)
   end
 
   def not_found

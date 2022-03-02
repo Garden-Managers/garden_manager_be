@@ -10,7 +10,8 @@ Ruby on Rails
 Javascript
 GoogleOAuth2
 
-
+## Database Schema
+![Screen Shot 2022-03-01 at 6 23 38 PM](https://user-images.githubusercontent.com/79548116/156272649-c9853aa4-b373-4844-85b8-c9dcdadec331.png)
 
 ## APIs Used
   - [OpenWeather API](https://openweathermap.org/api)
@@ -23,6 +24,23 @@ GoogleOAuth2
 ![Screen Shot 2022-02-28 at 12 01 50 PM](https://user-images.githubusercontent.com/87674632/156042705-a7c98218-20de-4320-a230-f3cfbd60b97f.png)
 ![Screen Shot 2022-02-28 at 12 03 43 PM](https://user-images.githubusercontent.com/87674632/156042947-209531b1-abc9-47aa-914b-3a8cac222f66.png)
 
+## Local Setup
+
+1. Fork and Clone the repo
+2. Install gem packages: `bundle install`
+3. Setup the database: `rails db:create`
+4. Run migrations: ` rails db:migrate`
+6. Create an account with [OpenWeather API](https://home.openweathermap.org/users/sign_up) and request an API key
+7. Create an account with [FarmSense API](https://www.farmsense.net/api/frost-date-api/)
+9. Install the Figaro gem: `bundle exec figaro install`
+10. Add your API key to the `application.yml` created by Figaro:
+  ```rb
+  OPENWEATHER_KEY: your_api_key
+  FARMSENSE_KEY: your_api_key
+  ```
+
+## Running the tests
+Run `bundle exec rspec` to run the test suite
 
 ## <ins>Contributors</ins>
 <p>

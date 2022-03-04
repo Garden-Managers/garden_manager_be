@@ -27,15 +27,23 @@ class Api::V1::UsersController < ApplicationController
     user = User.find(params[:id])
     weather = WeatherFacade.new
     # Finds the coordinates of the user based on user zip code
-    coords = weather.coordinates(user.zip)
     # Automatically updates the geo coordinates of the user for the JSON response.
-    user.update(latitude: coords[:lat], longitude: coords[:lon])
 
-    if user.update(user_params)
+    # require 'pry'; binding.pry
+    if params[:zip].present?
+      coords = weather.coordinates(user.zip)
+      user.update(latitude: coords[:lat], longitude: coords[:lon], zip: params[:zip])
       render json: UserSerializer.new(user)
     else
-      not_found
+      user.update(user_params)
+      render json: UserSerializer.new(user)
     end
+
+    # if user.update(name: params[:name], zip: params[:zip], latitude: coords[:lat], longitude: coords[:lon])
+    #   render json: UserSerializer.new(user)
+    # else
+    #   not_found
+    # end
   end
 
   def destroy

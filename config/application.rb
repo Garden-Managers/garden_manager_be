@@ -24,10 +24,6 @@ module GardenManagerBe
     Dir.glob(Rails.root.join('config/constants/**/*.rb')).each do |filename|
       require filename
     end
-<<<<<<< HEAD
-
-=======
->>>>>>> 5a4b8e3d90c82d7f407322d0419b9668e5fda7b1
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading

@@ -83,3 +83,5 @@ production:
   database: garden_manager_be_production
   username: garden_manager_be
   password: <%= ENV['GARDEN_MANAGER_BE_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
+
